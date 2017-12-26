@@ -1,3 +1,4 @@
+import std.conv : to;
 import x11.X;
 import x11.Xlib;
 
@@ -36,6 +37,9 @@ void main()
 
     auto wmProtocols = XInternAtom(display, wmProtocol, False);
     auto wmDeleteWindow = XInternAtom(display, wmDeleteWindowStr, False);
+
+    auto protocols = [wmDeleteWindow];
+    XSetWMProtocols(display, window, protocols.ptr, protocols.length.to!int);
 
     // Show window.
     XMapWindow(display, window);
