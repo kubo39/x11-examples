@@ -6,10 +6,16 @@ void main()
     // Open display connection.
     auto display = XOpenDisplay(null);
     assert(display !is null, "XOpenDisplay failed.");
+    scope (exit) XCloseDisplay(display);
 
     // Create window.
     auto screen = XDefaultScreen(display);
     auto root  =XRootWindow(display, screen);
+    scope (exit)
+    {
+        XUnmapWindow(display, root);
+        XDestroyWindow(display, root);
+    }
 
     XSetWindowAttributes attributes = void;
     attributes.background_pixel = XWhitePixel(display, screen);
