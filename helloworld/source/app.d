@@ -12,11 +12,7 @@ void main()
     // Create window.
     auto screen = XDefaultScreen(display);
     auto root  =XRootWindow(display, screen);
-    scope (exit)
-    {
-        XUnmapWindow(display, root);
-        XDestroyWindow(display, root);
-    }
+    scope (exit) XDestroyWindow(display, root);
 
     XSetWindowAttributes attributes = void;
     attributes.background_pixel = XWhitePixel(display, screen);
@@ -43,6 +39,7 @@ void main()
 
     // Show window.
     XMapWindow(display, window);
+    scope (exit) XUnmapWindow(display, root);
 
     // Mainloop.
     XEvent event = void;
