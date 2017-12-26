@@ -1,0 +1,15 @@
+helloworld
+.dub
+docs.json
+__dummy.html
+docs/
+helloworld.so
+helloworld.dylib
+helloworld.dll
+helloworld.a
+helloworld.lib
+helloworld-test-*
+*.exe
+*.o
+*.obj
+*.lst
