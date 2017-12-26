@@ -47,7 +47,8 @@ void main()
     // Mainloop.
     XEvent event = void;
 
-    while (true)
+    bool running = true;
+    while (running)
     {
         XNextEvent(display, &event);
 
@@ -61,12 +62,11 @@ void main()
                 auto protocol = cast(Atom) xclient.data.l[0];
 
                 if (protocol == wmDeleteWindow)
-                    goto END;
+                    running = false;
             }
             break;
         default:
             // nop
         }
     }
-END:
 }
