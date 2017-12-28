@@ -52,15 +52,8 @@ void main()
         switch (event.type)
         {
         case ClientMessage:
-            auto xclient = event.xclient;
-
-            if (xclient.message_type == wmProtocols && xclient.format == 32)
-            {
-                auto protocol = cast(Atom) xclient.data.l[0];
-
-                if (protocol == wmDeleteWindow)
-                    running = false;
-            }
+            if (cast(Atom) event.xclient.data.l[0] == wmDeleteWindow)
+                running = false;
             break;
         default:
             // nop
